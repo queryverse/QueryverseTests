@@ -7,15 +7,24 @@ julia:
   - 0.6
 notifications:
   email: true
-script:
+addons:
+  apt:
+    packages:
+      - xvfb
+      - xauth
+      - libgtk-3-0  
+install:
   - julia -e 'Pkg.clone("https://github.com/davidanthoff/Dataverse.jl.git")'
+before_script:
+  - if [[ `uname` = "Linux" ]]; then TESTCMD="xvfb-run julia"; else TESTCMD="julia"; fi
+  - ENV["PYTHON"]="";
+script:
   - julia -e 'Pkg.test("DataValues")'
-  - julia -e 'Pkg.test("IterableTables")'
+  - $TESTCMD -e 'Pkg.test("IterableTables")'
   - julia -e 'Pkg.test("Query")'
   - julia -e 'Pkg.test("FileIO")'
   - julia -e 'Pkg.test("ExcelFiles")'
   - julia -e 'Pkg.test("StatFiles")'
   - julia -e 'Pkg.test("CSVFiles")'
   - julia -e 'Pkg.test("FeatherFiles")'
-  - julia -e 'Pkg.test("DataFrames")'
   - julia -e 'Pkg.test("Dataverse")'
