@@ -24,7 +24,11 @@ build_script:
 
 test_script:
   - C:\projects\julia\bin\julia -e "Pkg.test(\"DataValues\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"IteratorInterfaceExtensions\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"TableTraits\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"TableTraitsUtils\")"
   - C:\projects\julia\bin\julia -e "Pkg.test(\"IterableTables\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"QueryOperators\")"
   - C:\projects\julia\bin\julia -e "Pkg.test(\"Query\")"
   - C:\projects\julia\bin\julia -e "Pkg.test(\"FileIO\")"
   - C:\projects\julia\bin\julia -e "Pkg.test(\"ExcelFiles\")"
