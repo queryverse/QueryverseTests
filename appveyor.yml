@@ -1,0 +1,34 @@
+environment:
+  matrix:
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.6/julia-0.6-latest-win32.exe"
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+
+notifications:
+  - provider: Email
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: false
+
+install:
+  - ps: "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12"
+# Download most recent Julia Windows binary
+  - ps: (new-object net.webclient).DownloadFile(
+        $env:JULIA_URL,
+        "C:\projects\julia-binary.exe")
+# Run installer silently, output to C:\projects\julia
+  - C:\projects\julia-binary.exe /S /D=C:\projects\julia
+
+build_script:
+  - C:\projects\julia\bin\julia -e "versioninfo();
+      Pkg.clone(\"https://github.com/davidanthoff/Dataverse.jl.git\")"
+
+test_script:
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"DataValues\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"IterableTables\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"Query\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"FileIO\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"ExcelFiles\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"StatFiles\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"CSVFiles\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"FeatherFiles\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"Dataverse\")"
