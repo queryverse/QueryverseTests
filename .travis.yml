@@ -14,10 +14,10 @@ addons:
       - xauth
       - libgtk-3-0  
 install:
+  - ENV["PYTHON"]="";
   - julia -e 'Pkg.clone("https://github.com/davidanthoff/Dataverse.jl.git")'
 before_script:
   - if [[ `uname` = "Linux" ]]; then TESTCMD="xvfb-run julia"; else TESTCMD="julia"; fi
-  - ENV["PYTHON"]="";
 script:
   - julia -e 'Pkg.test("DataValues")'
   - $TESTCMD -e 'Pkg.test("IterableTables")'
