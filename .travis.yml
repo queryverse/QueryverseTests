@@ -16,6 +16,7 @@ addons:
 install:
   - ENV["PYTHON"]="";
   - julia -e 'Pkg.clone("https://github.com/davidanthoff/Dataverse.jl.git")'
+  - julia -e 'Pkg.status()'
 before_script:
   - if [[ `uname` = "Linux" ]]; then TESTCMD="xvfb-run julia"; else TESTCMD="julia"; fi
 script:
