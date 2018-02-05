@@ -15,7 +15,7 @@ addons:
       - xauth
       - libgtk-3-0  
 install:
-  - julia -e 'Pkg.clone("https://github.com/davidanthoff/Dataverse.jl.git")'
+  - julia -e 'Pkg.clone("https://github.com/davidanthoff/Queryverse.jl.git")'
   - julia -e 'ENV["PYTHON"]=""; Pkg.build("ExcelReaders")'
   - julia -e 'Pkg.status()'
 before_script:
@@ -33,4 +33,4 @@ script:
   - julia -e 'Pkg.test("StatFiles")'
   - julia -e 'Pkg.test("CSVFiles")'
   - julia -e 'Pkg.test("FeatherFiles")'
-  - julia -e 'Pkg.test("Dataverse")'
+  - julia -e 'Pkg.test("Queryverse")'

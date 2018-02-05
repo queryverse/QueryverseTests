@@ -20,7 +20,7 @@ install:
 
 build_script:
   - C:\projects\julia\bin\julia -e "versioninfo();
-      Pkg.clone(\"https://github.com/davidanthoff/Dataverse.jl.git\")"
+      Pkg.clone(\"https://github.com/davidanthoff/Queryverse.jl.git\")"
 
 test_script:
   - C:\projects\julia\bin\julia -e "Pkg.test(\"DataValues\")"
@@ -35,4 +35,4 @@ test_script:
   - C:\projects\julia\bin\julia -e "Pkg.test(\"StatFiles\")"
   - C:\projects\julia\bin\julia -e "Pkg.test(\"CSVFiles\")"
   - C:\projects\julia\bin\julia -e "Pkg.test(\"FeatherFiles\")"
-  - C:\projects\julia\bin\julia -e "Pkg.test(\"Dataverse\")"
+  - C:\projects\julia\bin\julia -e "Pkg.test(\"Queryverse\")"
