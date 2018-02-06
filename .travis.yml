@@ -34,4 +34,4 @@ script:
   - julia -e 'Pkg.test("CSVFiles")'
   - julia -e 'Pkg.test("FeatherFiles")'
   - julia -e 'Pkg.test("ParquetFiles")'
-  - julia -e 'Pkg.test("Queryverse")'
+  - $TESTCMD -e 'Pkg.test("Queryverse")'
