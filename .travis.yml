@@ -34,5 +34,5 @@ script:
   - julia -e 'using Pkg; pkg"test StatFiles"'
   - julia -e 'using Pkg; pkg"test CSVFiles"'
   - julia -e 'using Pkg; pkg"test FeatherFiles"'
-  - julia -e 'using Pkg; pkg"test ParquetFiles"'
+  #- julia -e 'using Pkg; pkg"test ParquetFiles"'
   - $TESTCMD -e 'using Pkg; pkg"test Queryverse"'
