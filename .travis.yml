@@ -5,7 +5,7 @@ os:
   - linux
   - osx
 julia:
-  - 0.6
+  - 1.0
 notifications:
   email: true
 addons:
@@ -14,24 +14,25 @@ addons:
       - xvfb
       - xauth
       - libgtk-3-0  
+env:
+  - PYTHON=""  
 install:
-  - julia -e 'Pkg.clone("https://github.com/davidanthoff/Queryverse.jl.git")'
-  - julia -e 'ENV["PYTHON"]=""; Pkg.build("ExcelReaders")'
-  - julia -e 'Pkg.status()'
+  - julia -e 'using Pkg; pkg"add Queryverse"'
+  - julia -e 'using Pkg; pkg"status"'
 before_script:
   - if [[ `uname` = "Linux" ]]; then TESTCMD="xvfb-run julia"; else TESTCMD="julia"; fi
 script:
-  - julia -e 'Pkg.test("DataValues")'
-  - julia -e 'Pkg.test("IteratorInterfaceExtensions")'
-  - julia -e 'Pkg.test("TableTraits")'
-  - julia -e 'Pkg.test("TableTraitsUtils")'
-  - $TESTCMD -e 'Pkg.test("IterableTables")'
-  - julia -e 'Pkg.test("QueryOperators")'
-  - julia -e 'Pkg.test("Query")'
-  - julia -e 'Pkg.test("FileIO")'
-  - julia -e 'Pkg.test("ExcelFiles")'
-  - julia -e 'Pkg.test("StatFiles")'
-  - julia -e 'Pkg.test("CSVFiles")'
-  - julia -e 'Pkg.test("FeatherFiles")'
-  - julia -e 'Pkg.test("ParquetFiles")'
-  - $TESTCMD -e 'Pkg.test("Queryverse")'
+  - julia -e 'using Pkg; pkg"test DataValues"'
+  - julia -e 'using Pkg; pkg"test IteratorInterfaceExtensions"'
+  - julia -e 'using Pkg; pkg"test TableTraits"'
+  - julia -e 'using Pkg; pkg"test TableTraitsUtils"'
+  - $TESTCMD -e 'using Pkg; pkg"test IterableTables"'
+  - julia -e 'using Pkg; pkg"test QueryOperators"'
+  - julia -e 'using Pkg; pkg"test Query"'
+  - julia -e 'using Pkg; pkg"test FileIO"'
+  - julia -e 'using Pkg; pkg"test ExcelFiles"'
+  - julia -e 'using Pkg; pkg"test StatFiles"'
+  - julia -e 'using Pkg; pkg"test CSVFiles"'
+  - julia -e 'using Pkg; pkg"test FeatherFiles"'
+  - julia -e 'using Pkg; pkg"test ParquetFiles"'
+  - $TESTCMD -e 'using Pkg; pkg"test Queryverse"'
