@@ -6,6 +6,7 @@ os:
   - osx
 julia:
   - 1.0
+  - 1.1
 notifications:
   email: true
 addons:
@@ -13,26 +14,34 @@ addons:
     packages:
       - xvfb
       - xauth
-      - libgtk-3-0  
+      - libgtk-3-0
 env:
-  - PYTHON=""  
+  - PYTHON=""
 install:
-  - julia -e 'using Pkg; pkg"add Queryverse"'
-  - julia -e 'using Pkg; pkg"status"'
+  - julia -e --project=. 'using Pkg; pkg"instantiate"'
+  - julia -e --project=. 'using Pkg; pkg"status"'
 before_script:
   - if [[ `uname` = "Linux" ]]; then TESTCMD="xvfb-run julia"; else TESTCMD="julia"; fi
 script:
-  - julia -e 'using Pkg; pkg"test DataValues"'
-  - julia -e 'using Pkg; pkg"test IteratorInterfaceExtensions"'
-  - julia -e 'using Pkg; pkg"test TableTraits"'
-  - julia -e 'using Pkg; pkg"test TableTraitsUtils"'
-  - $TESTCMD -e 'using Pkg; pkg"test IterableTables"'
-  - julia -e 'using Pkg; pkg"test QueryOperators"'
-  - julia -e 'using Pkg; pkg"test Query"'
-  - julia -e 'using Pkg; pkg"test FileIO"'
-  - julia -e 'using Pkg; pkg"test ExcelFiles"'
-  - julia -e 'using Pkg; pkg"test StatFiles"'
-  - julia -e 'using Pkg; pkg"test CSVFiles"'
-  - julia -e 'using Pkg; pkg"test FeatherFiles"'
-  #- julia -e 'using Pkg; pkg"test ParquetFiles"'
-  - $TESTCMD -e 'using Pkg; pkg"test Queryverse"'
+  - julia -e --project=. 'using Pkg; pkg"test DataValues"'
+  - julia -e --project=. 'using Pkg; pkg"test IteratorInterfaceExtensions"'
+  - julia -e --project=. 'using Pkg; pkg"test TableTraits"'
+  - julia -e --project=. 'using Pkg; pkg"test TableTraitsUtils"'
+  - $TESTCMD -e --project=. 'using Pkg; pkg"test IterableTables"'
+  - julia -e --project=. 'using Pkg; pkg"test QueryOperators"'
+  - julia -e --project=. 'using Pkg; pkg"test Query"'
+  - julia -e --project=. 'using Pkg; pkg"test FileIO"'
+  - julia -e --project=. 'using Pkg; pkg"test ExcelReaders"'
+  - julia -e --project=. 'using Pkg; pkg"test ExcelFiles"'
+  - julia -e --project=. 'using Pkg; pkg"test ReadStat"'
+  - julia -e --project=. 'using Pkg; pkg"test StatFiles"'
+  - julia -e --project=. 'using Pkg; pkg"test CSVFiles"'
+  - julia -e --project=. 'using Pkg; pkg"test FeatherLib"'
+  - julia -e --project=. 'using Pkg; pkg"test FeatherFiles"'
+  - julia -e --project=. 'using Pkg; pkg"test ParquetFiles"'
+  - julia -e --project=. 'using Pkg; pkg"test QueryTables"'
+  - julia -e --project=. 'using Pkg; pkg"test TableShowUtils"'
+  - julia -e --project=. 'using Pkg; pkg"test VegaDatasets"'
+  - $TESTCMD -e --project=. 'using Pkg; pkg"test ElectronDisplay"'
+  - $TESTCMD -e --project=. 'using Pkg; pkg"test DataVoyager"'
+  - $TESTCMD -e --project=. 'using Pkg; pkg"test Queryverse"'
