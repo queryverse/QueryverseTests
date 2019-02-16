@@ -24,6 +24,7 @@ install:
 build_script:
   - C:\julia\bin\julia --color=yes -e "using InteractiveUtils; versioninfo()"
   - C:\julia\bin\julia --project=. --color=yes -e "using Pkg; pkg\"instantiate\""
+  - C:\julia\bin\julia --project=. --color=yes -e "using Pkg; pkg\"status\""
 
 test_script:
   - C:\julia\bin\julia --project=. --color=yes -e "using Pkg; pkg\"test DataValues\""
